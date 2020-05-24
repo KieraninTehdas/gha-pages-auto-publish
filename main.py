@@ -12,8 +12,19 @@ def main() -> None:
     with open(TRIGGER_PAYLOAD_PATH, 'r') as f:
         input_event = json.load(f)
 
-    pprint(input_event)
+    schedule = input_event['schedule']
+
+
+def parse_cron(cron_expression: str) -> datetime.timedelta:
+    expressions = cron_expression.split(' ')
+
+    if len(expressions) != 5:
+        raise ValueError(
+            f'Unexpected Cron Expression Length. Expected 6: Found {len(expressions)}')
+
+    datetime.timedelta(m)
 
 
 if __name__ == "__main__":
-    main()
+    ['minutes', 'hours']
+    pprint(datetime.timedelta(**{'minutes': 1}))
