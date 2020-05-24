@@ -1,13 +1,9 @@
-name: "Python Container Action Template"
-description: "Get started with Python Container actions"
-author: "Jacob Tomlinson"
-inputs:
-  myInput:
-    description: "Input to use"
-    default: "world"
+name: "Publish Future Github Pages Posts"
+description: "Sets future Jekyll blog posts to be published when their date passes."
+author: "Kieran Porter"
 outputs:
-  myOutput:
-    description: "Output from the action"
+  publishedPosts:
+    description: "A list of posts that have now been published."
 runs:
   using: "docker"
   image: "Dockerfile"

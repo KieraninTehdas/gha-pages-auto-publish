@@ -1,13 +1,18 @@
-import os
-import requests  # noqa We are just importing this to prove the dependency installed correctly
+from pprint import pprint
+import datetime
+import json
+
+TRIGGER_PAYLOAD_PATH = '/github/workflow/event.json'
 
 
-def main():
-    my_input = os.environ["INPUT_MYINPUT"]
+def main() -> None:
+    now = datetime.date.today()
+    print(now.isoformat())
 
-    my_output = f"Hello {my_input}"
+    with open(TRIGGER_PAYLOAD_PATH, 'r') as f:
+        input_event = json.load(f)
 
-    print(f"::set-output name=myOutput::{my_output}")
+    pprint(input_event)
 
 
 if __name__ == "__main__":
