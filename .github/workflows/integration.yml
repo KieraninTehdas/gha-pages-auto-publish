@@ -1,5 +1,7 @@
 name: Integration Test
-on: [push]
+on:
+  schedule:
+    - cron: "*/15 * * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -9,8 +11,7 @@ jobs:
         id: selftest
 
         # Put your action repo here
-        uses: jacobtomlinson/python-container-action@master
-
-      - name: Check outputs
-        run: |
-          test "${{ steps.selftest.outputs.myOutput }}" == "Hello world"
+        uses: kieranintehdas/gha-pages-auto-publish@master
+      # - name: Check outputs
+      #   run: |
+      #     test "${{ steps.selftest.outputs.myOutput }}" == "Hello world"
