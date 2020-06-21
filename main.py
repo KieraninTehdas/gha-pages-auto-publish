@@ -1,18 +1,24 @@
-from pprint import pprint
+import os
+import glob
 import datetime
-import json
+import itertools as it
 
-TRIGGER_PAYLOAD_PATH = '/github/workflow/event.json'
+
+PRE_PUBLISH_PATH = "./ready-for-publish/"
+PUBLISHED_PATH = "./_posts/"
 
 
 def main() -> None:
-    now = datetime.date.today()
-    print(now.isoformat())
+    posts_to_publish = [
+        filename for filename in
+        it.chain(glob.iglob(f"{PRE_PUBLISH_PATH}**.md", recursive=True),
+                 glob.iglob(f"{PRE_PUBLISH_PATH}**.markdown", recursive=True))
+        if filename.strip(PRE_PUBLISH_PATH)[:10] < datetime.date.today().isoformat()
+    ]
 
-    with open(TRIGGER_PAYLOAD_PATH, 'r') as f:
-        input_event = json.load(f)
-
-    pprint(input_event)
+    for post_path in posts_to_publish:
+        os.replace(post_path, post_path.replace(
+            PRE_PUBLISH_PATH, PUBLISHED_PATH))
 
 
 if __name__ == "__main__":
