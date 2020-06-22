@@ -3,7 +3,7 @@ description: "Sets future Jekyll blog posts to be published when their date pass
 author: "Kieran Porter"
 outputs:
   publishedPosts:
-    description: "A list of posts that have now been published."
+    description: The number of posts that will be published."
 runs:
   using: "docker"
   image: "Dockerfile"
